@@ -22,7 +22,7 @@ public class UsuarioDAO {
 
     public UsuarioDAO() {
 
-        //this.connection = DbUtil.getConnection();
+        this.connection = DbUtil.getConnection();
         this.connection = FabricaAbstrata.criarFabricaAbstrata(SGBD.MYSQL).criarConector().conectar();
     }
 

@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -17,6 +19,15 @@ public class Fornecedor implements Observer {
     private int fornecedorId;
     private String nome;
     private int QtdVacinaEstoque;
+    private List<String> Ocorrencia = new ArrayList<String>();
+
+    public List<String> getOcorrencia() {
+        return Ocorrencia;
+    }
+
+    public void setOcorrencia(List<String> Ocorrencia) {
+        this.Ocorrencia = Ocorrencia;
+    }
 
     public void setFornecedorId(int fornecedorId) {
         this.fornecedorId = fornecedorId;
@@ -42,16 +53,17 @@ public class Fornecedor implements Observer {
         return QtdVacinaEstoque;
     }
 
-    
-
-    @Override
+   
+   @Override
     public void update(Observable o, Object o1) {
         PostoAtendimento postoAtendimento = (PostoAtendimento) o;
         String acao = String.valueOf(o1);
         if (acao.equals("Normal") && (postoAtendimento.getQuantidadeVacinas() - postoAtendimento.getLimiar() <= 20)) {
-            System.out.println("Fornecedor: Atenção! preparar reabastecimento do " + postoAtendimento.getNome() + " " + postoAtendimento.getQuantidadeVacinas());
+            Ocorrencia.add("Atenção! preparar reabastecimento do " + postoAtendimento.getNome() + ". Quantidade de Vacinas :" + postoAtendimento.getQuantidadeVacinas());
         } else if (acao.equals("Critico")) {
-            System.out.println("Fornecedor: Urgente reabastecer o " + postoAtendimento.getNome() + " " + postoAtendimento.getQuantidadeVacinas());
+            Ocorrencia.add("Urgente reabastecer o " + postoAtendimento.getNome() + ". Quantidade de Vacinas: " + postoAtendimento.getQuantidadeVacinas());
+        }else{
+            Ocorrencia.add("O posto de atendimento" + postoAtendimento.getNome() + ".  Quantidade de Vacinas: " + postoAtendimento.getQuantidadeVacinas());
         }
     }
 }

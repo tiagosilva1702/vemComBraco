@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,6 +42,15 @@ public class SecretariaSaude  implements Observer{
     private int SecretariaSaudeId;
     private List<PostoAtendimento> postosAtendimentos;
     private String secretario;
+    private List<String> Ocorrencia = new ArrayList<String>();
+
+    public void setOcorrencia(List<String> Ocorrencia) {
+        this.Ocorrencia = Ocorrencia;
+    }
+
+    public List<String> getOcorrencia() {
+        return Ocorrencia;
+    }
 
 
     @Override
@@ -48,9 +58,9 @@ public class SecretariaSaude  implements Observer{
         PostoAtendimento postoAtendimento = (PostoAtendimento)o;
         String acao = String.valueOf(o1);
         if (acao.equals("Normal")) {
-            System.out.println("SecretariaSaude: Quantidade normal de vacina no posto " +postoAtendimento.getNome() + " " + postoAtendimento.getQuantidadeVacinas());
+            Ocorrencia.add("Quantidade Normal de vacina no posto " +postoAtendimento.getNome() + ". Quantitativo de : " + postoAtendimento.getQuantidadeVacinas());
         }else if(acao.equals("Critico")){
-            System.out.println("SecretariaSaude: Quantidade critica de vacina no posto " +postoAtendimento.getNome() + " " + postoAtendimento.getQuantidadeVacinas());
+            Ocorrencia.add("Quantidade Critica de vacina no posto " +postoAtendimento.getNome() + ".Quantitativo de : " + postoAtendimento.getQuantidadeVacinas());
                 }
     }
 }

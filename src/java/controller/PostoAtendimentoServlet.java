@@ -40,7 +40,7 @@ public class PostoAtendimentoServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PostoAtendimentoServlet</title>");            
+            out.println("<title>Servlet PostoAtendimentoServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet PostoAtendimentoServlet at " + request.getContextPath() + "</h1>");
@@ -61,7 +61,7 @@ public class PostoAtendimentoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         PostoAtendimento pa = new PostoAtendimento();
         SecretariaSaude ss = new SecretariaSaude();
         Fornecedor fd = new Fornecedor();
@@ -72,21 +72,23 @@ public class PostoAtendimentoServlet extends HttpServlet {
         pa.setQuantidadeVacinas(10);
         pa.setQuantidadeVacinas(100);
         pa.setQuantidadeVacinas(20);
-        
+
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet PostoAtendimentoServlet</title>");            
+            out.println("<title>Servlet PostoAtendimentoServlet</title>");
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>Servlet PostoAtendimentoServlet at " + ss.getOcorrencia() + "</h1>");
+            out.println("<h1>Servlet PostoAtendimentoServlet at " + fd.getOcorrencia() + "</h1>");
             out.println("<h1>Servlet PostoAtendimentoServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-        
+
         processRequest(request, response);
     }
 
@@ -101,8 +103,7 @@ public class PostoAtendimentoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+
         processRequest(request, response);
     }
 
