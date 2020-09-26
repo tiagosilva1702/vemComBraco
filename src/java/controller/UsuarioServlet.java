@@ -57,7 +57,30 @@ public class UsuarioServlet extends HttpServlet {
         String action = request.getParameter("action");
         UsuarioDAO dao = new UsuarioDAO(); //Crian uma instancia do DAO usuario
 
-        if (action.equalsIgnoreCase("deletar")) {
+        if(action != null)
+        {
+            if (action.equalsIgnoreCase("deletar")) {
+                //int userId = Integer.parseInt(request.getParameter("usuarioId"));
+                //dao.get(userId);
+                forward = LIST_USER;
+                //request.setAttribute("users", dao.getAllUsers());    
+            } else if (action.equalsIgnoreCase("editar")) {
+                forward = INSERT_OR_EDIT;
+                //int userId = Integer.parseInt(request.getParameter("userId"));
+                //User user = dao.getUserById(userId);
+                //request.setAttribute("user", user);
+            } else {
+                forward = LIST_USER;
+                request.setAttribute("users", dao.ListarUsuario());
+            }
+        }
+        else 
+        {
+             forward = LIST_USER;
+            request.setAttribute("users", dao.ListarUsuario());
+        }
+        
+        /*if (action.equalsIgnoreCase("deletar")) {
             //int userId = Integer.parseInt(request.getParameter("usuarioId"));
             //dao.get(userId);
             forward = LIST_USER;
@@ -73,6 +96,7 @@ public class UsuarioServlet extends HttpServlet {
         } else {
             forward = INSERT_OR_EDIT;
         }
+        */
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
